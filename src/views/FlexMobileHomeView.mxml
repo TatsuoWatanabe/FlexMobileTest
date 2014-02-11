@@ -23,11 +23,20 @@
 			})();
 			
 			button1.addEventListener(FlexEvent.BUTTON_DOWN, function(): void {
-				list1.dataProvider.addItem({
+				var photos: Array = [
+					'http://www.google.co.jp/images/google_favicon_128.png',
+					'http://pic.prepics-cdn.com/favorite0pic/31202775.jpeg',
+					'http://pic.prepics-cdn.com/free3688/31198305.jpeg',
+					'http://pic.prepics-cdn.com/meloncandy/31276276.jpeg',
+					'http://pic.prepics-cdn.com/favorite0pic/28529563.jpeg'
+				];
+				var obj: Object = {
 					msg: counter() + textinput1.text + "\n" + textinput1.text,
-					name: 'tatsuo'
-					, photo: 'http://www.google.co.jp/images/google_favicon_128.png'
-				});
+					name: 'tatsuo',
+					photo: photos[Math.floor(Math.random() * photos.length)]
+				};
+				
+				list1.dataProvider.addItem(obj);
 			});
 		}
 		]]>
@@ -43,11 +52,14 @@
 							animation        = "true"
 							iconWidth        = "60"
 							iconHeight       = "60"
-							messageStyleName = "rendererLabel"
+							paddingTop       = "0"
+							paddingBottom    = "0"
 							fontSize         = "15"
 							iconField        = "photo"
 							labelField       = "name"
+							paddingRight     = "0"
 							messageField     = "msg"
+							messageStyleName = "rendererLabel"
 							/>
 					</fx:Component>
 				</s:itemRenderer>
