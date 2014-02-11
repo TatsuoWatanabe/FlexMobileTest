@@ -17,7 +17,6 @@ package
 		public var animation: Boolean = true;
 		
 		/**
-		 * 
 		 * コンストラクタ
 		 */
 		public function ChatItemRenderer() {
@@ -30,12 +29,11 @@ package
 		 */
 		public override function set data(value:Object):void {
 			super.data = value;
-
 			const list: List = this.owner as List;
 			list.dataProvider.addEventListener(CollectionEvent.COLLECTION_CHANGE, function(e: CollectionEvent): void {
-				if (e.kind !== CollectionEventKind.ADD ) { return; }
+				if (e.kind !== CollectionEventKind.ADD) { return; }
 				
-				while ( list.dataProvider.length > listMaxLength ) list.dataProvider.removeItemAt(0);
+				while (list.dataProvider.length > listMaxLength) list.dataProvider.removeItemAt(0);
 				list.validateNow();
 				
 				if (animation) {
@@ -60,8 +58,9 @@ package
 		protected override function createChildren():void {
 			super.createChildren();
 			if(labelDisplay != null) {
-				labelDisplay.multiline = true;
-				labelDisplay.wordWrap  = true;
+				labelDisplay.multiline  = true;
+				labelDisplay.wordWrap   = true;
+				labelDisplay.selectable = true;
 			}
 		}
 		
@@ -71,9 +70,9 @@ package
 		 * このメソッドをオーバーライドします。パフォーマンスに影響するため、
 		 * 必要がない場合は super.measure() を呼び出さないでください。
 		 */
-		protected override function measure():void {
+/*		protected override function measure():void {
 			super.measure();
-		}
+		}*/
 		
 		/**
 		 * @private
@@ -81,7 +80,7 @@ package
 		 * オーバーライドします。パフォーマンスに影響するため、必要がない場合は
 		 * super.drawBackground() を呼び出さないでください。
 		 */
-		protected override function drawBackground(unscaledWidth:Number,
+/*		protected override function drawBackground(unscaledWidth:Number,
 												   unscaledHeight:Number):void {
 			var g:Graphics = graphics;
 			var backgroundColor :uint;
@@ -105,16 +104,16 @@ package
 			g.drawRoundRectComplex(6, 6, unscaledWidth - 12,
 				unscaledHeight - 12, 9, 9, 9, 9);
 			//g.endFill();
-		}
+		}*/
 		/**
 		 * @private
 		 * このアイテムレンダラーの背景の描画方法を変更するには、このメソッドを
 		 * オーバーライドします。パフォーマンスに影響するため、必要がない場合は
 		 * super.layoutContents() を呼び出さないでください。
 		 */
-		protected override function layoutContents(unscaledWidth:Number,
+/*		protected override function layoutContents(unscaledWidth:Number,
 												   unscaledHeight:Number):void {
 			super.layoutContents(unscaledWidth, unscaledHeight);
-		}
+		}*/
 	}
 }

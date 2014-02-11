@@ -24,32 +24,11 @@
 			
 			button1.addEventListener(FlexEvent.BUTTON_DOWN, function(): void {
 				list1.dataProvider.addItem({
-					msg: counter() + textinput1.text,
+					msg: counter() + textinput1.text + "\n" + textinput1.text,
 					name: 'tatsuo'
+					, photo: 'http://www.google.co.jp/images/google_favicon_128.png'
 				});
 			});
-			
-/* 			list1.dataProvider.addEventListener(CollectionEvent.COLLECTION_CHANGE, function(e: CollectionEvent): void {
-				const listMaxLength: int = 15;
-				if (e.kind === CollectionEventKind.ADD ) {
-					setTimeout(function(): void {
-						// 規定上限数を10超えたら削除
-						if ( list1.dataProvider.length > listMaxLength + 10 ) {
-							while ( list1.dataProvider.length > listMaxLength ) list1.dataProvider.removeItemAt(0);
-						}
-						list1.validateNow();
-						//list1.layout.verticalScrollPosition += list1.layout.getVerticalScrollPositionDelta(NavigationUnit.END);
-						const animate: Animate = new Animate(list1.dataGroup);
-						animate.duration = 150;
-						animate.motionPaths = Vector.<MotionPath>([new SimpleMotionPath(
-							"verticalScrollPosition", // property
-							null, // valueFrom
-							list1.layout.verticalScrollPosition + list1.layout.getVerticalScrollPositionDelta(NavigationUnit.END) // valueTo
-						)]);
-						animate.play();
-					}, 10);
-				}
-			}); */
 		}
 		]]>
 	</fx:Script>
@@ -60,8 +39,10 @@
 					<fx:Component>
 						<local:ChatItemRenderer
 							listMaxLength    = "50"
-							duration         = "100"
+							duration         = "150"
 							animation        = "true"
+							iconWidth        = "60"
+							iconHeight       = "60"
 							messageStyleName = "rendererLabel"
 							fontSize         = "15"
 							iconField        = "photo"
