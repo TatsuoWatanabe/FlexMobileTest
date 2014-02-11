@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		actionBarVisible="false" initialize="onload()" title="HomeView" xmlns:local="*">
+	<fx:Declarations>
+		<!-- 非ビジュアルエレメント (サービス、値オブジェクトなど) をここに配置 -->
+	</fx:Declarations>
+	<fx:Style>
+		.rendererLabel {
+			fontSize: 15;
+			color: #FF0000;
+		}
+	</fx:Style>
+	
+	<fx:Script>
+		<![CDATA[
+		import mx.events.FlexEvent;
+
+		protected function onload(): void {
+			const counter: Function = (function(): Function {
+				var i: int = 0;
+				return function(): int { return ++i; };
+			})();
+			
+			button1.addEventListener(FlexEvent.BUTTON_DOWN, function(): void {
+				list1.dataProvider.addItem({
+					msg: counter() + textinput1.text,
+					name: 'tatsuo'
+				});
+			});
+			
+/* 			list1.dataProvider.addEventListener(CollectionEvent.COLLECTION_CHANGE, function(e: CollectionEvent): void {
+				const listMaxLength: int = 15;
+				if (e.kind === CollectionEventKind.ADD ) {
+					setTimeout(function(): void {
+						// 規定上限数を10超えたら削除
+						if ( list1.dataProvider.length > listMaxLength + 10 ) {
+							while ( list1.dataProvider.length > listMaxLength ) list1.dataProvider.removeItemAt(0);
+						}
+						list1.validateNow();
+						//list1.layout.verticalScrollPosition += list1.layout.getVerticalScrollPositionDelta(NavigationUnit.END);
+						const animate: Animate = new Animate(list1.dataGroup);
+						animate.duration = 150;
+						animate.motionPaths = Vector.<MotionPath>([new SimpleMotionPath(
+							"verticalScrollPosition", // property
+							null, // valueFrom
+							list1.layout.verticalScrollPosition + list1.layout.getVerticalScrollPositionDelta(NavigationUnit.END) // valueTo
+						)]);
+						animate.play();
+					}, 10);
+				}
+			}); */
+		}
+		]]>
+	</fx:Script>
+	<s:VGroup width="100%" height="100%">
+		<s:HGroup width="100%" height="90%">
+			<s:List width="100%" height="100%" id="list1">
+				<s:itemRenderer>
+					<fx:Component>
+						<local:ChatItemRenderer
+							listMaxLength    = "50"
+							duration         = "100"
+							animation        = "true"
+							messageStyleName = "rendererLabel"
+							fontSize         = "15"
+							iconField        = "photo"
+							labelField       = "name"
+							messageField     = "msg"
+							/>
+					</fx:Component>
+				</s:itemRenderer>
+				<s:ArrayCollection />
+			</s:List>
+		</s:HGroup>
+		<s:HGroup width="100%" height="10%" horizontalAlign="center" verticalAlign="middle" paddingLeft="10" paddingRight="10">
+			<s:TextInput id="textinput1" width="80%" fontSize="20" text="Input" />
+			<s:Button id="button1" width="20%" height="50%" label="ADD" fontSize="20"/>
+		</s:HGroup>
+	</s:VGroup>
+</s:View>
